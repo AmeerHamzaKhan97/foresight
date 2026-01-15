@@ -1,0 +1,44 @@
+# Task List: Creator Affiliation & Credibility Analyzer (MERN)
+
+- [x] Analyze PRD and Draft Technical Design
+    - [x] Create `docs/technical_design.md` skeleton
+    - [x] Define System Architecture (High Level)
+    - [x] Define Database Schema (Models)
+    - [x] Define API Endpoints
+    - [x] Define Ingestion & AI Pipeline
+- [x] Review and Refine Design
+    - [x] Identify Ambiguities and Questions
+    - [x] Update Design based on User Feedback
+    - [x] Create Technical Approach & User Stories (`docs/technical_approach.md`)
+
+## Epic 1: Creator Discovery & Ingestion
+- [x] **1. Project Structure & Environment** (Foundation)
+    - [x] Initialize Root Monorepo (`package.json`, `.gitignore`).
+    - [x] Setup `server` directory with Express & Mongoose.
+    - [x] Setup `client` directory with Vite & Tailwind.
+    - [x] Configure Environment Variables (`.env` parsing).
+- [ ] **2. Database Layer** (Dependency for API)
+    - [ ] Connect Mongoose to MongoDB.
+    - [ ] Implement `Creator` Schema (`handle`, `status`, `affiliationScore`).
+- [ ] **3. Basic API Implementation** (Dependency for Frontend)
+    - [ ] Implement `GET /health` endpoint.
+    - [ ] Implement `GET /api/creators` (Search Logic with Regex).
+    - [ ] Implement `POST /api/creators` (Input Validation only).
+- [ ] **4. Job Queue Infrastructure** (Dependency for Workers)
+    - [ ] Install BullMQ & Redis client.
+    - [ ] Create `queueFactory` utility.
+    - [ ] Initialize `ingestion-queue` in Server.
+- [ ] **5. Ingestion Worker Logic** (Core Logic)
+    - [ ] Implement `TwitterScraper` service (using `agent-twitter-client`).
+    - [ ] Create `validate-creator` Job Processor.
+    - [ ] Update `POST /api/creators` to enqueue jobs.
+- [ ] **6. Frontend Foundation** (UI Shell)
+    - [ ] Setup API Client (Axios/React Query).
+    - [ ] Create `Layout` component (Header/Footer).
+- [ ] **7. Feature: Creator Search** (User Story 1.1)
+    - [ ] Create `SearchBar` component.
+    - [ ] Implement Search Results dropdown/page.
+- [ ] **8. Feature: Add Creator** (User Story 1.2)
+    - [ ] Create `AddCreatorForm` component.
+    - [ ] Connect to `POST /api/creators`.
+    - [ ] Handle "Pending" state UI feedback.
