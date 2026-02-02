@@ -10,6 +10,8 @@ export const config = {
   MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/foresight',
   REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
   GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+  TWITTER_BEARER_TOKEN: process.env.TWITTER_BEARER_TOKEN || '',
   TWITTER_USERNAME: process.env.TWITTER_USERNAME,
   TWITTER_PASSWORD: process.env.TWITTER_PASSWORD,
+  TWITTER_COOKIES: process.env.TWITTER_COOKIES, // New field
 };
