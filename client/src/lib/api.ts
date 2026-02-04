@@ -16,18 +16,37 @@ api.interceptors.request.use((config) => {
   if (useMock) {
     // Intercept and return mock data for specific routes
     if (config.url?.startsWith('/creators')) {
-      const handle = config.url.split('/')[2]?.split('?')[0];
+      const urlParts = config.url.split('?')[0].split('/');
+      const handle = urlParts[2];
       const isSearch = config.url.includes('?query=');
       const isSignals = config.url.endsWith('/signals');
+      const isPost = config.method?.toLowerCase() === 'post';
 
+      // Handle POST /creators (Add Creator)
+      if (isPost && config.url === '/creators') {
+        const body = JSON.parse(config.data || '{}');
+        const handleFromUrl = body.url?.split('/').pop()?.replace('@', '');
+        const creator = MOCK_CREATORS.find(c => c.handle.toLowerCase() === handleFromUrl?.toLowerCase());
+        
+        if (creator) {
+          return Promise.reject({
+            config,
+            mockResponse: { data: { creator, message: 'Added from mock' } }
+          });
+        }
+      }
+
+      // Handle Signals
       if (isSignals && handle) {
-        const signals = MOCK_SIGNALS[handle as keyof typeof MOCK_SIGNALS] || [];
+        const signalKey = Object.keys(MOCK_SIGNALS).find(k => k.toLowerCase() === handle.toLowerCase());
+        const signals = signalKey ? (MOCK_SIGNALS as any)[signalKey] : [];
         return Promise.reject({
           config,
           mockResponse: { data: { signals } }
         });
       }
 
+      // Handle Search
       if (isSearch) {
         const query = new URLSearchParams(config.url.split('?')[1]).get('query') || '';
         const results = MOCK_CREATORS.filter(c => 
@@ -40,7 +59,8 @@ api.interceptors.request.use((config) => {
         });
       }
 
-      if (handle) {
+      // Handle Profile
+      if (handle && !isPost) {
         const creator = MOCK_CREATORS.find(c => c.handle.toLowerCase() === handle.toLowerCase());
         if (creator) {
           return Promise.reject({
