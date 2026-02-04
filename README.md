@@ -13,6 +13,13 @@
 [**View the Live Demo on GitHub Pages**](https://AmeerHamzaKhan97.github.io/foresight/)
 *(Note: The demo uses mock data to showcase the UI and analysis patterns.)*
 
+### 🔍 Try searching for:
+- **Narendra Modi** (`narendramodi`)
+- **Yogi Adityanath** (`myogiadityanath`)
+- **Bill Gates** (`BillGates`)
+- **Jr NTR** (`tarak9999`)
+- **Veritasium** (`veritasium`)
+
 ---
 
 ## ✨ Key Features

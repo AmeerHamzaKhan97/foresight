@@ -1,5 +1,53 @@
 export const MOCK_CREATORS = [
   {
+    handle: "narendramodi",
+    displayName: "Narendra Modi",
+    status: "ACTIVE",
+    profileImage: "https://unavatar.io/twitter/narendramodi",
+    metadata: {
+      description: "Prime Minister of India",
+      followersCount: 95000000
+    },
+    affiliationScore: 90,
+    credibilityScore: 88
+  },
+  {
+    handle: "myogiadityanath",
+    displayName: "Yogi Adityanath",
+    status: "ACTIVE",
+    profileImage: "https://unavatar.io/twitter/myogiadityanath",
+    metadata: {
+      description: "Chief Minister, Uttar Pradesh, India",
+      followersCount: 28000000
+    },
+    affiliationScore: 92,
+    credibilityScore: 85
+  },
+  {
+    handle: "BillGates",
+    displayName: "Bill Gates",
+    status: "ACTIVE",
+    profileImage: "https://unavatar.io/twitter/BillGates",
+    metadata: {
+      description: "Sharing things I'm learning through my foundation work and other interests.",
+      followersCount: 62000000
+    },
+    affiliationScore: 78,
+    credibilityScore: 94
+  },
+  {
+    handle: "tarak9999",
+    displayName: "Jr NTR",
+    status: "ACTIVE",
+    profileImage: "https://unavatar.io/twitter/tarak9999",
+    metadata: {
+      description: "Actor",
+      followersCount: 7500000
+    },
+    affiliationScore: 65,
+    credibilityScore: 89
+  },
+  {
     handle: "veritasium",
     displayName: "Veritasium",
     status: "ACTIVE",
@@ -10,34 +58,102 @@ export const MOCK_CREATORS = [
     },
     affiliationScore: 75,
     credibilityScore: 98
-  },
-  {
-    handle: "elonmusk",
-    displayName: "Elon Musk",
-    status: "ACTIVE",
-    profileImage: "https://unavatar.io/twitter/elonmusk",
-    metadata: {
-      description: "X Everything App",
-      followersCount: 170000000
-    },
-    affiliationScore: 40,
-    credibilityScore: 65
-  },
-  {
-    handle: "vitalikbuterin",
-    displayName: "Vitalik Buterin",
-    status: "ACTIVE",
-    profileImage: "https://unavatar.io/twitter/VitalikButerin",
-    metadata: {
-      description: "Fere libenter homines id quod volunt credunt",
-      followersCount: 5000000
-    },
-    affiliationScore: 85,
-    credibilityScore: 92
   }
 ];
 
 export const MOCK_SIGNALS = {
+  narendramodi: [
+    {
+      _id: "m1",
+      type: "affiliation",
+      data: {
+        entities: [
+          { name: "Viksit Bharat", sentiment: "+", confidence: 0.98 },
+          { name: "Global South", sentiment: "+", confidence: 0.92 }
+        ],
+        summary: "Strongly aligned with national development and global leadership narratives."
+      },
+      createdAt: new Date().toISOString()
+    },
+    {
+      _id: "m2",
+      type: "credibility",
+      data: {
+        score: 88,
+        reasoning: "Official communications with high consistency in policy messaging."
+      },
+      createdAt: new Date().toISOString()
+    }
+  ],
+  myogiadityanath: [
+    {
+      _id: "y1",
+      type: "affiliation",
+      data: {
+        entities: [
+          { name: "UP Development", sentiment: "+", confidence: 0.96 },
+          { name: "Cultural Heritage", sentiment: "+", confidence: 0.94 }
+        ],
+        summary: "Primary focus on administrative reforms and cultural preservation."
+      },
+      createdAt: new Date().toISOString()
+    },
+    {
+      _id: "y2",
+      type: "credibility",
+      data: {
+        score: 85,
+        reasoning: "Consistent track record in administrative execution and public safety claims."
+      },
+      createdAt: new Date().toISOString()
+    }
+  ],
+  BillGates: [
+    {
+      _id: "b1",
+      type: "affiliation",
+      data: {
+        entities: [
+          { name: "Global Health", sentiment: "+", confidence: 0.95 },
+          { name: "Climate Innovation", sentiment: "+", confidence: 0.90 }
+        ],
+        summary: "Deeply aligned with scientific philanthropy and sustainable energy."
+      },
+      createdAt: new Date().toISOString()
+    },
+    {
+      _id: "b2",
+      type: "credibility",
+      data: {
+        score: 94,
+        reasoning: "Data-driven approach to global problems with high transparency."
+      },
+      createdAt: new Date().toISOString()
+    }
+  ],
+  tarak9999: [
+    {
+      _id: "t1",
+      type: "affiliation",
+      data: {
+        entities: [
+          { name: "Telugu Cinema", sentiment: "+", confidence: 0.99 },
+          { name: "Indian Film Industry", sentiment: "+", confidence: 0.95 }
+        ],
+        summary: "Centered on cinematic achievements and cultural influence."
+      },
+      createdAt: new Date().toISOString()
+    },
+    {
+      _id: "t2",
+      type: "credibility",
+      data: {
+        score: 89,
+        reasoning: "Authentic engagement and high consistency in personal branding."
+      },
+      createdAt: new Date().toISOString()
+    }
+  ],
   veritasium: [
     {
       _id: "s1",
@@ -57,52 +173,6 @@ export const MOCK_SIGNALS = {
       data: {
         score: 98,
         reasoning: "Consistently cites peer-reviewed sources and corrects errors publicly."
-      },
-      createdAt: new Date().toISOString()
-    }
-  ],
-  elonmusk: [
-    {
-      _id: "s3",
-      type: "affiliation",
-      data: {
-        entities: [
-          { name: "Techno-optimism", sentiment: "+", confidence: 0.92 },
-          { name: "Free Speech Absolutism", sentiment: "+", confidence: 0.85 }
-        ],
-        summary: "Highly focused on technological advancement and platform governance."
-      },
-      createdAt: new Date().toISOString()
-    },
-    {
-      _id: "s4",
-      type: "credibility",
-      data: {
-        score: 65,
-        reasoning: "High impact but occasionally promotes unverified information or memes."
-      },
-      createdAt: new Date().toISOString()
-    }
-  ],
-  VitalikButerin: [
-    {
-      _id: "s5",
-      type: "affiliation",
-      data: {
-        entities: [
-          { name: "Ethereum Ecosystem", sentiment: "+", confidence: 0.98 },
-          { name: "Decentralized Governance", sentiment: "+", confidence: 0.94 }
-        ],
-        summary: "Primary focus on blockchain development and philosophical decentralization."
-      },
-      createdAt: new Date().toISOString()
-    },
-    {
-      _id: "s6",
-      type: "credibility",
-      data: {
-        score: 92,
-        reasoning: "Deep technical expertise and transparent communication about complex systems."
       },
       createdAt: new Date().toISOString()
     }
