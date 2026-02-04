@@ -259,9 +259,7 @@ const CreatorProfile = () => {
 
         {signals.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {[...signals]
-              .sort((a, _) => (a.type === 'affiliation' ? -1 : 1))
-              .map((signal, idx) => (
+            {signals.map((signal, idx) => (
               <SignalCard key={signal._id || idx} signal={signal} />
             ))}
           </div>

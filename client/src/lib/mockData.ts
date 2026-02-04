@@ -70,8 +70,9 @@ export const MOCK_SIGNALS = {
         entities: [
           { name: "Nanavati", sentiment: "+", strength: 0.9 }
         ],
-        summary: "The content primarily consists of personal health updates, expressions of gratitude, and spiritual reflections. The only identifiable entity fitting the criteria of a brand or company is 'Nanavati', which is mentioned as providing 'excellent care and nursing', indicating a strong positive sentiment."
+        reasoning: "The content primarily consists of personal health updates, expressions of gratitude, and spiritual reflections. The only identifiable entity fitting the criteria of a brand or company is 'Nanavati', which is mentioned as providing 'excellent care and nursing', indicating a strong positive sentiment. There are no mentions of specific politicians, political parties, or defined ideologies/movements."
       },
+      reasoning: "The content primarily consists of personal health updates, expressions of gratitude, and spiritual reflections. The only identifiable entity fitting the criteria of a brand or company is 'Nanavati', which is mentioned as providing 'excellent care and nursing', indicating a strong positive sentiment. There are no mentions of specific politicians, political parties, or defined ideologies/movements.",
       createdAt: "2026-02-04T15:44:06.164Z"
     },
     {
@@ -89,9 +90,9 @@ export const MOCK_SIGNALS = {
           { text: "family and staff undergone tests , results awaited.", verifiable: true, hasEvidence: false },
           { text: "Irfaan Khan passed away.", verifiable: true, hasEvidence: false }
         ],
-        overallConfidence: "High",
-        summary: "Verified medical status and hospital discharge timeline. The signals show high consistency with official health reporting from Nanavati hospital."
+        overallConfidence: "High"
       },
+      reasoning: "High",
       createdAt: "2026-02-04T15:44:19.361Z"
     }
   ],
@@ -106,6 +107,7 @@ export const MOCK_SIGNALS = {
         ],
         summary: "Highly aligned with tech education and product reviews."
       },
+      reasoning: "Consistent history of transparent reviews and technical analysis.",
       createdAt: new Date().toISOString()
     },
     {
@@ -115,6 +117,7 @@ export const MOCK_SIGNALS = {
         score: 92,
         reasoning: "Consistent history of transparent reviews and technical analysis."
       },
+      reasoning: "Consistent history of transparent reviews and technical analysis.",
       createdAt: new Date().toISOString()
     }
   ],
@@ -129,6 +132,7 @@ export const MOCK_SIGNALS = {
         ],
         summary: "Deeply aligned with scientific philanthropy and sustainable energy."
       },
+      reasoning: "Deeply aligned with scientific philanthropy and sustainable energy.",
       createdAt: new Date().toISOString()
     },
     {
@@ -138,6 +142,7 @@ export const MOCK_SIGNALS = {
         score: 94,
         reasoning: "Data-driven approach to global problems with high transparency."
       },
+      reasoning: "Data-driven approach to global problems with high transparency.",
       createdAt: new Date().toISOString()
     }
   ],
@@ -152,6 +157,7 @@ export const MOCK_SIGNALS = {
         ],
         summary: "Centered on cinematic achievements and cultural influence."
       },
+      reasoning: "Centered on cinematic achievements and cultural influence.",
       createdAt: new Date().toISOString()
     },
     {
@@ -161,6 +167,7 @@ export const MOCK_SIGNALS = {
         score: 89,
         reasoning: "Authentic engagement and high consistency in personal branding."
       },
+      reasoning: "Authentic engagement and high consistency in personal branding.",
       createdAt: new Date().toISOString()
     }
   ],
@@ -175,6 +182,7 @@ export const MOCK_SIGNALS = {
         ],
         summary: "Strongly aligned with scientific integrity and educational outreach."
       },
+      reasoning: "Strongly aligned with scientific integrity and educational outreach.",
       createdAt: new Date().toISOString()
     },
     {
@@ -184,6 +192,7 @@ export const MOCK_SIGNALS = {
         score: 98,
         reasoning: "Consistently cites peer-reviewed sources and corrects errors publicly."
       },
+      reasoning: "Consistently cites peer-reviewed sources and corrects errors publicly.",
       createdAt: new Date().toISOString()
     }
   ]

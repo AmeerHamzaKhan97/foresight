@@ -120,7 +120,7 @@ const SignalCard: React.FC<SignalProps> = ({ signal }) => {
               <MessageSquare className="h-4 w-4 text-zinc-500 mt-1" />
               <p className="text-sm text-zinc-400 leading-relaxed">
                 <span className="text-zinc-200 font-medium mr-1 text-xs uppercase tracking-wider">AI Reasoning:</span>
-                {signal.reasoning}
+                {signal.reasoning || signal.data?.reasoning}
               </p>
             </div>
           </div>
