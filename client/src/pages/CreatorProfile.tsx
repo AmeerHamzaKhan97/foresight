@@ -184,6 +184,22 @@ const CreatorProfile = () => {
 
       {/* Scores Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Credibility Timeline (Now Left) */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col justify-between">
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-zinc-500 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4" />
+                Credibility Timeline
+              </h3>
+              <div className="text-2xl font-black text-emerald-500">{creator?.credibilityScore || 0}%</div>
+            </div>
+            
+            <ScoreTimeline signals={signals} />
+          </div>
+        </div>
+
+        {/* Ideological Alignment (Now Right) */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col justify-between">
           <div className="space-y-8">
             <h3 className="text-zinc-500 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
@@ -224,20 +240,6 @@ const CreatorProfile = () => {
             )}
           </div>
         </div>
-
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col justify-between">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-zinc-500 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4" />
-                Credibility Timeline
-              </h3>
-              <div className="text-2xl font-black text-emerald-500">{creator?.credibilityScore || 0}%</div>
-            </div>
-            
-            <ScoreTimeline signals={signals} />
-          </div>
-        </div>
       </div>
 
       {/* AI Signals Section */}
@@ -257,7 +259,9 @@ const CreatorProfile = () => {
 
         {signals.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {signals.map((signal, idx) => (
+            {[...signals]
+              .sort((a, _) => (a.type === 'affiliation' ? -1 : 1))
+              .map((signal, idx) => (
               <SignalCard key={signal._id || idx} signal={signal} />
             ))}
           </div>

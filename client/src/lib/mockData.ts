@@ -89,7 +89,8 @@ export const MOCK_SIGNALS = {
           { text: "family and staff undergone tests , results awaited.", verifiable: true, hasEvidence: false },
           { text: "Irfaan Khan passed away.", verifiable: true, hasEvidence: false }
         ],
-        overallConfidence: "High"
+        overallConfidence: "High",
+        summary: "Verified medical status and hospital discharge timeline. The signals show high consistency with official health reporting from Nanavati hospital."
       },
       createdAt: "2026-02-04T15:44:19.361Z"
     }

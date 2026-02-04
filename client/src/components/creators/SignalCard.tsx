@@ -106,6 +106,14 @@ const SignalCard: React.FC<SignalProps> = ({ signal }) => {
             </div>
           )}
 
+          {signal.data?.summary && (
+            <div className="p-4 bg-blue-500/5 border border-blue-500/10 rounded-xl mb-4">
+              <p className="text-sm text-zinc-300 leading-relaxed">
+                {signal.data.summary}
+              </p>
+            </div>
+          )}
+
           {/* Reasoning */}
           <div className="pt-4 border-t border-zinc-800">
             <div className="flex items-start gap-2">
