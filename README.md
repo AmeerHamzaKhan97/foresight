@@ -51,48 +51,61 @@ foresight/
 
 ## ⚙️ Getting Started
 
-### Prerequisites
+### 1. Push Code to GitHub
 
-- **Node.js**: v18+ 
-- **MongoDB**: Local or Atlas instance.
-- **Redis**: Required for BullMQ (background jobs).
+If you haven't already, link this project to your GitHub repository:
 
-### Installation
+```ps1
+# Add your remote repository (Replace with your actual URL)
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
 
-1. **Clone the repository**:
-   ```ps1
-   git clone <your-repo-url>
-   cd foresight
-   ```
+# Push the code
+git branch -M master
+git push -u origin master
+```
 
-2. **Install dependencies**:
+### 2. Local Setup
+
+1. **Install dependencies**:
    ```ps1
    npm install
-   # This will install dependencies for both client and server via workspaces
    ```
 
-3. **Environment Setup**:
-   Create a `.env` file in the root (or `server/`) and add:
+2. **Environment Setup**:
+   Create a `.env` file in the root and add:
    ```env
    MONGODB_URI=your_mongodb_uri
    REDIS_URL=redis://localhost:6379
    GEMINI_API_KEY=your_gemini_key
    ```
 
-4. **Running the Application**:
+3. **Running the Application**:
    ```ps1
    npm run dev
    ```
 
 ---
 
-## 📝 Deployment to GitHub Pages (Demo)
+## 🚀 Live Demo (GitHub Pages)
 
-To deploy the frontend to GitHub Pages:
+The project is configured to automatically use **mock data** when hosted on GitHub Pages (detected via `github.io` hostname).
 
-1. Update the `base` property in `client/vite.config.ts` if your repo is not at the root.
-2. Build the project: `npm run build` --workspace=client.
-3. Use the `gh-pages` package or manually push the `dist` folder to the `gh-pages` branch.
+### How to Deploy:
+
+1. **Install deployment tool**:
+   ```ps1
+   cd client
+   npm install
+   ```
+
+2. **Deploy the frontend**:
+   ```ps1
+   npm run deploy
+   ```
+   *This will build the React app and push it to the `gh-pages` branch.*
+
+3. **Update Demo Link**:
+   Once deployed, replace `YOUR_GITHUB_PAGES_URL_HERE` at the top of this file with your actual URL (usually `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`).
 
 ---
 
