@@ -14,6 +14,7 @@
 *(Note: The demo uses mock data to showcase the UI and analysis patterns.)*
 
 ### 🔍 Try searching for:
+- **Amitabh Bachchan** (`SrBachchan`)
 - **Arun Maini** (`mrwhosetheboss`)
 - **Bill Gates** (`BillGates`)
 - **Jr NTR** (`tarak9999`)

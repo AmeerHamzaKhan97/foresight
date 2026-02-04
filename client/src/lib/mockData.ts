@@ -1,5 +1,17 @@
 export const MOCK_CREATORS = [
   {
+    handle: "SrBachchan",
+    displayName: "Amitabh Bachchan",
+    status: "ACTIVE",
+    profileImage: "https://unavatar.io/twitter/SrBachchan",
+    metadata: {
+      description: "Actor, producer, television host, former politician and occasional playback singer.",
+      followersCount: 48900000
+    },
+    affiliationScore: 85,
+    credibilityScore: 92
+  },
+  {
     handle: "mrwhosetheboss",
     displayName: "Arun Maini",
     status: "ACTIVE",
@@ -50,6 +62,38 @@ export const MOCK_CREATORS = [
 ];
 
 export const MOCK_SIGNALS = {
+  SrBachchan: [
+    {
+      _id: "69836946274a287551200672",
+      type: "affiliation",
+      data: {
+        entities: [
+          { name: "Nanavati", sentiment: "+", strength: 0.9 }
+        ],
+        summary: "The content primarily consists of personal health updates, expressions of gratitude, and spiritual reflections. The only identifiable entity fitting the criteria of a brand or company is 'Nanavati', which is mentioned as providing 'excellent care and nursing', indicating a strong positive sentiment."
+      },
+      createdAt: "2026-02-04T15:44:06.164Z"
+    },
+    {
+      _id: "69836953274a287551200678",
+      type: "credibility",
+      data: {
+        claims: [
+          { text: "I have tested CoVid- have been discharged.", verifiable: true, hasEvidence: false },
+          { text: "I am back home in solitary quarantine.", verifiable: true, hasEvidence: false },
+          { text: "excellent care and nursing at Nanavati made it possible for me to see this day.", verifiable: true, hasEvidence: false },
+          { text: "My daughter and daughter-in-law were discharged from the hospital.", verifiable: true, hasEvidence: false },
+          { text: "I have tested CoviD positive.", verifiable: true, hasEvidence: false },
+          { text: "I was shifted to Hospital.", verifiable: true, hasEvidence: false },
+          { text: "hospital informing authorities.", verifiable: true, hasEvidence: false },
+          { text: "family and staff undergone tests , results awaited.", verifiable: true, hasEvidence: false },
+          { text: "Irfaan Khan passed away.", verifiable: true, hasEvidence: false }
+        ],
+        overallConfidence: "High"
+      },
+      createdAt: "2026-02-04T15:44:19.361Z"
+    }
+  ],
   mrwhosetheboss: [
     {
       _id: "mw1",
