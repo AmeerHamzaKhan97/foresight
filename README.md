@@ -10,7 +10,7 @@
 ---
 
 ## 🚀 Live Demo
-[**View the Live Demo on GitHub Pages**](YOUR_GITHUB_PAGES_URL_HERE)
+[**View the Live Demo on GitHub Pages**](https://AmeerHamzaKhan97.github.io/foresight/)
 *(Note: The demo uses mock data to showcase the UI and analysis patterns.)*
 
 ---
