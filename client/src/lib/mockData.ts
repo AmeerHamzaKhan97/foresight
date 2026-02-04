@@ -1,27 +1,15 @@
 export const MOCK_CREATORS = [
   {
-    handle: "narendramodi",
-    displayName: "Narendra Modi",
+    handle: "mrwhosetheboss",
+    displayName: "Arun Maini",
     status: "ACTIVE",
-    profileImage: "https://unavatar.io/twitter/narendramodi",
+    profileImage: "https://unavatar.io/twitter/mrwhosetheboss",
     metadata: {
-      description: "Prime Minister of India",
-      followersCount: 95000000
+      description: "Tech enthusiast. Probably talking about a new phone.",
+      followersCount: 4500000
     },
-    affiliationScore: 90,
-    credibilityScore: 88
-  },
-  {
-    handle: "myogiadityanath",
-    displayName: "Yogi Adityanath",
-    status: "ACTIVE",
-    profileImage: "https://unavatar.io/twitter/myogiadityanath",
-    metadata: {
-      description: "Chief Minister, Uttar Pradesh, India",
-      followersCount: 28000000
-    },
-    affiliationScore: 92,
-    credibilityScore: 85
+    affiliationScore: 70,
+    credibilityScore: 92
   },
   {
     handle: "BillGates",
@@ -62,48 +50,25 @@ export const MOCK_CREATORS = [
 ];
 
 export const MOCK_SIGNALS = {
-  narendramodi: [
+  mrwhosetheboss: [
     {
-      _id: "m1",
+      _id: "mw1",
       type: "affiliation",
       data: {
         entities: [
-          { name: "Viksit Bharat", sentiment: "+", confidence: 0.98 },
-          { name: "Global South", sentiment: "+", confidence: 0.92 }
+          { name: "Consumer Tech", sentiment: "+", confidence: 0.95 },
+          { name: "Smartphone Innovation", sentiment: "+", confidence: 0.90 }
         ],
-        summary: "Strongly aligned with national development and global leadership narratives."
+        summary: "Highly aligned with tech education and product reviews."
       },
       createdAt: new Date().toISOString()
     },
     {
-      _id: "m2",
+      _id: "mw2",
       type: "credibility",
       data: {
-        score: 88,
-        reasoning: "Official communications with high consistency in policy messaging."
-      },
-      createdAt: new Date().toISOString()
-    }
-  ],
-  myogiadityanath: [
-    {
-      _id: "y1",
-      type: "affiliation",
-      data: {
-        entities: [
-          { name: "UP Development", sentiment: "+", confidence: 0.96 },
-          { name: "Cultural Heritage", sentiment: "+", confidence: 0.94 }
-        ],
-        summary: "Primary focus on administrative reforms and cultural preservation."
-      },
-      createdAt: new Date().toISOString()
-    },
-    {
-      _id: "y2",
-      type: "credibility",
-      data: {
-        score: 85,
-        reasoning: "Consistent track record in administrative execution and public safety claims."
+        score: 92,
+        reasoning: "Consistent history of transparent reviews and technical analysis."
       },
       createdAt: new Date().toISOString()
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader2, AlertCircle, Twitter, Users, ShieldCheck, Activity, Brain } from 'lucide-react';
 import api from '../lib/api';
@@ -160,22 +160,22 @@ const CreatorProfile = () => {
           </div>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
           <div className="flex items-center gap-3 mb-1">
             <h1 className="text-3xl font-bold text-white">{creator?.displayName || handle}</h1>
             <ShieldCheck className="h-6 w-6 text-blue-500" />
           </div>
           <p className="text-zinc-400 text-lg mb-4">@{creator?.handle}</p>
-          <p className="text-zinc-300 max-w-2xl">{creator?.metadata?.description}</p>
+          <p className="text-zinc-300 max-w-2xl mx-auto md:mx-0">{creator?.metadata?.description}</p>
         </div>
 
         <div className="flex flex-row md:flex-col gap-4 w-full md:w-auto">
-          <div className="p-4 bg-zinc-800/50 rounded-xl border border-zinc-700/50 flex-1 md:w-40">
+          <div className="px-6 py-4 bg-zinc-800/50 rounded-xl border border-zinc-700/50 flex-1 md:min-w-[160px]">
             <div className="flex items-center gap-2 text-zinc-400 text-sm mb-1">
               <Users className="h-4 w-4" />
               <span>Followers</span>
             </div>
-            <div className="text-2xl font-bold text-white">
+            <div className="text-2xl font-bold text-white break-all">
               {new Intl.NumberFormat().format(creator?.metadata?.followersCount || 0)}
             </div>
           </div>
