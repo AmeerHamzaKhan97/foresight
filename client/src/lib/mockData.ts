@@ -80,20 +80,33 @@ export const MOCK_SIGNALS = {
       type: "credibility",
       data: {
         claims: [
-          { text: "I have tested CoVid- have been discharged.", verifiable: true, hasEvidence: false },
+          { text: "I have tested CoVid- have been discharged.", verifiable: true, hasEvidence: true },
           { text: "I am back home in solitary quarantine.", verifiable: true, hasEvidence: false },
           { text: "excellent care and nursing at Nanavati made it possible for me to see this day.", verifiable: true, hasEvidence: false },
-          { text: "My daughter and daughter-in-law were discharged from the hospital.", verifiable: true, hasEvidence: false },
-          { text: "I have tested CoviD positive.", verifiable: true, hasEvidence: false },
-          { text: "I was shifted to Hospital.", verifiable: true, hasEvidence: false },
-          { text: "hospital informing authorities.", verifiable: true, hasEvidence: false },
+          { text: "My daughter and daughter-in-law were discharged from the hospital.", verifiable: true, hasEvidence: true },
+          { text: "I have tested CoviD positive.", verifiable: true, hasEvidence: true },
+          { text: "I was shifted to Hospital.", verifiable: true, hasEvidence: true },
+          { text: "hospital informing authorities.", verifiable: true, hasEvidence: true },
           { text: "family and staff undergone tests , results awaited.", verifiable: true, hasEvidence: false },
-          { text: "Irfaan Khan passed away.", verifiable: true, hasEvidence: false }
+          { text: "Irfaan Khan passed away.", verifiable: true, hasEvidence: true }
         ],
         overallConfidence: "High"
       },
-      reasoning: "High",
+      reasoning: "Strong clinical documentation and public verified statements.",
       createdAt: "2026-02-04T15:44:19.361Z"
+    },
+    {
+      _id: "69836953274a287551200679",
+      type: "credibility",
+      data: {
+        claims: [
+          { text: "Initial reports of health issues were accurate.", verifiable: true, hasEvidence: true },
+          { text: "Follow-up testing confirmed recovery.", verifiable: true, hasEvidence: true }
+        ],
+        overallConfidence: "High"
+      },
+      reasoning: "Consistent updates with hospital-verified information.",
+      createdAt: "2026-02-05T01:00:00.000Z"
     }
   ],
   mrwhosetheboss: [
@@ -133,7 +146,7 @@ export const MOCK_SIGNALS = {
         summary: "Deeply aligned with scientific philanthropy and sustainable energy."
       },
       reasoning: "Deeply aligned with scientific philanthropy and sustainable energy.",
-      createdAt: new Date().toISOString()
+      createdAt: new Date(Date.now() - 86400000).toISOString()
     },
     {
       _id: "b2",
@@ -143,6 +156,16 @@ export const MOCK_SIGNALS = {
         reasoning: "Data-driven approach to global problems with high transparency."
       },
       reasoning: "Data-driven approach to global problems with high transparency.",
+      createdAt: new Date(Date.now() - 86400000).toISOString()
+    },
+    {
+      _id: "b3",
+      type: "credibility",
+      data: {
+        score: 96,
+        reasoning: "Continued documentation of foundation impact with peer-reviewed backing."
+      },
+      reasoning: "Continued documentation of foundation impact with peer-reviewed backing.",
       createdAt: new Date().toISOString()
     }
   ],
@@ -158,10 +181,20 @@ export const MOCK_SIGNALS = {
         summary: "Centered on cinematic achievements and cultural influence."
       },
       reasoning: "Centered on cinematic achievements and cultural influence.",
-      createdAt: new Date().toISOString()
+      createdAt: new Date(Date.now() - 86400000 * 2).toISOString()
     },
     {
       _id: "t2",
+      type: "credibility",
+      data: {
+        score: 85,
+        reasoning: "Initial analysis of engagement quality."
+      },
+      reasoning: "Initial analysis of engagement quality.",
+      createdAt: new Date(Date.now() - 86400000 * 2).toISOString()
+    },
+    {
+      _id: "t3",
       type: "credibility",
       data: {
         score: 89,

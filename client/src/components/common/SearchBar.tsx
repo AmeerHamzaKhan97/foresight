@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Search as SearchIcon } from 'lucide-react';
 
 const SearchBar = () => {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const cleanseInput = (input: string) => {
@@ -49,6 +50,11 @@ const SearchBar = () => {
       }
     };
   }, []);
+
+  // Clear query when location changes (e.g. clicking a result)
+  useEffect(() => {
+    setQuery('');
+  }, [location.pathname]);
 
   return (
     <form onSubmit={handleSubmit} className="relative w-full max-w-md">

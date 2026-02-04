@@ -10,25 +10,25 @@ const Navbar: React.FC = () => {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/50 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <div className="flex h-16 items-center justify-between gap-2">
+          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink-0">
             <div className="bg-blue-600 p-1.5 rounded-lg">
               <Zap className="h-5 w-5 text-white fill-current" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-white">Foresight</span>
+            <span className="text-xl font-bold tracking-tight text-white hidden sm:block">Foresight</span>
           </Link>
           
-          <div className="hidden md:flex flex-1 max-w-md mx-8">
+          <div className="flex flex-1 max-w-md mx-2 md:mx-8">
             <SearchBar />
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-shrink-0">
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all"
             >
               <Plus className="h-4 w-4" />
-              <span>Add Creator</span>
+              <span className="hidden sm:inline">Add Creator</span>
             </button>
           </div>
         </div>

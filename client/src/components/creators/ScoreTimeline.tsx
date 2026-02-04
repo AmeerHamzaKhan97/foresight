@@ -15,22 +15,30 @@ interface ScoreTimelineProps {
 const ScoreTimeline = ({ signals }: ScoreTimelineProps) => {
   // Extract and sort credibility signals by date
   const data = signals
-    .filter(s => s.type === 'credibility' && s.data?.claims)
+    .filter(s => s.type === 'credibility')
     .map(s => {
-      let verifiableClaims = 0;
-      let claimsWithEvidence = 0;
+      let score = 0;
       
-      s.data.claims.forEach((c: any) => {
-        if (c.verifiable) verifiableClaims++;
-        if (c.hasEvidence) claimsWithEvidence++;
-      });
+      if (s.data?.claims && Array.isArray(s.data.claims)) {
+        let verifiableClaims = 0;
+        let claimsWithEvidence = 0;
+        
+        s.data.claims.forEach((c: any) => {
+          if (c.verifiable) verifiableClaims++;
+          if (c.hasEvidence) claimsWithEvidence++;
+        });
 
-      const evidenceRatio = verifiableClaims > 0 ? (claimsWithEvidence / verifiableClaims) : 1.0;
-      const confidence = (s.data.overallConfidence || '').toLowerCase();
-      const confidenceWeight = confidence === 'high' ? 1.0 : (confidence === 'medium' ? 0.7 : 0.4);
-      const consistency = s.data.contradictionsFound ? 0.5 : 1.0;
-      
-      const score = Math.round(((evidenceRatio * 0.6) + (confidenceWeight * 0.2) + (consistency * 0.2)) * 100);
+        const evidenceRatio = verifiableClaims > 0 ? (claimsWithEvidence / verifiableClaims) : 1.0;
+        const confidence = (s.data.overallConfidence || '').toLowerCase();
+        const confidenceWeight = confidence === 'high' ? 1.0 : (confidence === 'medium' ? 0.7 : 0.4);
+        const consistency = s.data.contradictionsFound ? 0.5 : 1.0;
+        
+        score = Math.round(((evidenceRatio * 0.6) + (confidenceWeight * 0.2) + (consistency * 0.2)) * 100);
+      } else if (typeof s.data?.score === 'number') {
+        score = s.data.score;
+      } else if (typeof s.score === 'number') {
+        score = s.score;
+      }
 
       return {
         timestamp: new Date(s.createdAt).getTime(),
@@ -38,6 +46,7 @@ const ScoreTimeline = ({ signals }: ScoreTimelineProps) => {
         score: score
       };
     })
+    .filter(item => item.score > 0) // Only include points where we could calculate a score
     .sort((a, b) => a.timestamp - b.timestamp);
 
   if (data.length < 2) {
