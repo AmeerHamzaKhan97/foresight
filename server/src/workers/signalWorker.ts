@@ -1,6 +1,7 @@
 import { createWorker } from '../utils/queueFactory';
 import { Extractor } from '../services/ai/extractor';
 import { aggregationQueue } from '../utils/queues';
+import { Creator } from '../models/Creator';
 
 export const signalWorker = createWorker('signals-queue', async (job) => {
   const { name, data } = job;
@@ -18,6 +19,8 @@ export const signalWorker = createWorker('signals-queue', async (job) => {
       console.log(`[Worker:signals] Enqueued aggregation for creator: ${creatorId}`);
     } catch (error) {
       console.error(`[Worker:signals] Error extracting signals for ${creatorId}:`, error);
+      await Creator.findByIdAndDelete(creatorId);
+      console.log(`[Worker:signals] Deleted creator ${creatorId} due to signal extraction error`);
       throw error; // Allow BullMQ to handle retries
     }
   }

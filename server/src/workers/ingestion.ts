@@ -44,8 +44,8 @@ export const ingestionWorker = createWorker('ingestion-queue', async (job) => {
 
       } catch (scrapingError) {
         console.error(`[Worker:ingestion] Scraping error for @${creator.handle}:`, scrapingError);
-        creator.status = 'ERROR';
-        await creator.save();
+        await Creator.findByIdAndDelete(creatorId);
+        console.log(`[Worker:ingestion] Deleted creator @${creator.handle} due to scraping error`);
       }
 
     } catch (error) {
@@ -94,6 +94,8 @@ export const ingestionWorker = createWorker('ingestion-queue', async (job) => {
 
     } catch (error) {
       console.error(`[Worker:ingestion] Error fetching content for ${creatorId}:`, error);
+      await Creator.findByIdAndDelete(creatorId);
+      console.log(`[Worker:ingestion] Deleted creator ${creatorId} due to content fetch error`);
       throw error;
     }
   }

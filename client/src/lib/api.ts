@@ -59,6 +59,30 @@ api.interceptors.request.use((config) => {
         });
       }
 
+      // Handle Paginated List (Base /creators)
+      if (config.url === '/creators' || config.url.startsWith('/creators?')) {
+        const params = new URLSearchParams(config.url.split('?')[1] || '');
+        const page = parseInt(params.get('page') || '1');
+        const limit = parseInt(params.get('limit') || '10');
+        const startIndex = (page - 1) * limit;
+        const pagedCreators = MOCK_CREATORS.slice(startIndex, startIndex + limit);
+
+        return Promise.reject({
+          config,
+          mockResponse: {
+            data: {
+              creators: pagedCreators,
+              pagination: {
+                total: MOCK_CREATORS.length,
+                page,
+                limit,
+                totalPages: Math.ceil(MOCK_CREATORS.length / limit)
+              }
+            }
+          }
+        });
+      }
+
       // Handle Profile
       if (handle && !isPost) {
         const creator = MOCK_CREATORS.find(c => c.handle.toLowerCase() === handle.toLowerCase());
@@ -92,5 +116,34 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export interface Creator {
+  _id: string;
+  handle: string;
+  displayName: string;
+  status: 'PENDING' | 'ACTIVE' | 'PROCESSING' | 'COMPLETED' | 'ERROR';
+  affiliationScore?: number;
+  credibilityScore?: number;
+  profileImage?: string;
+  metadata?: {
+    followersCount?: number;
+    description?: string;
+  };
+}
+
+export interface GetCreatorsResponse {
+  creators: Creator[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+export const getCreators = async (page = 1, limit = 10): Promise<GetCreatorsResponse> => {
+  const response = await api.get('/creators', { params: { page, limit } });
+  return response.data;
+};
 
 export default api;

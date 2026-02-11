@@ -35,7 +35,8 @@ export const aggregationWorker = createWorker('aggregation-queue', async (job) =
       console.log(`- Credibility: ${result.credibility.finalScore}`);
     } catch (error) {
       console.error(`[Worker:aggregation] Error aggregating scores for ${creatorId}:`, error);
-      await Creator.findByIdAndUpdate(creatorId, { status: 'ERROR' });
+      await Creator.findByIdAndDelete(creatorId);
+      console.log(`[Worker:aggregation] Deleted creator ${creatorId} due to aggregation error`);
       throw error;
     }
   }

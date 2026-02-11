@@ -26,29 +26,58 @@ function extractTwitterHandle(profileUrl: string): string | null {
 }
 
 /**
- * GET /api/creators?query=<handle_or_name>&limit=20
- * Search for creators by handle or display name
+ * GET /api/creators?query=<handle_or_name>&page=1&limit=10
+ * Search for creators by handle or display name, or list all with pagination
  */
 router.get('/creators', async (req: Request, res: Response) => {
   try {
-    const { query, limit = 20 } = req.query;
+    const { query, page = 1, limit = 10 } = req.query;
     
-    if (!query || typeof query !== 'string') {
-      return res.json({ creators: [] });
+    const pageNum = Math.max(1, Number(page));
+    const limitNum = Math.max(1, Math.min(50, Number(limit))); // Cap limit at 50
+    const skip = (pageNum - 1) * limitNum;
+
+    let filter: any = {};
+    if (query && typeof query === 'string') {
+      filter = {
+        $or: [
+          { handle: { $regex: query, $options: 'i' } },
+          { displayName: { $regex: query, $options: 'i' } },
+        ],
+      };
     }
 
-    const creators = await Creator.find({
-      $or: [
-        { handle: { $regex: query, $options: 'i' } },
-        { displayName: { $regex: query, $options: 'i' } },
-      ],
-    })
-      .limit(Number(limit))
-      .select('handle displayName status affiliationScore credibilityScore');
+    const total = await Creator.countDocuments(filter);
+    
+    // If no documents found, return early
+    if (total === 0) {
+      return res.json({
+        creators: [],
+        pagination: {
+          total: 0,
+          page: pageNum,
+          limit: limitNum,
+          totalPages: 0
+        }
+      });
+    }
 
-    res.json({ creators });
+    const creators = await Creator.find(filter)
+      .sort({ affiliationScore: -1, createdAt: -1 }) // Sort by affiliation score desc, then new
+      .skip(skip)
+      .limit(limitNum)
+      .select('handle displayName status affiliationScore credibilityScore profileImage'); // proper field selection
+
+    res.json({
+      creators,
+      pagination: {
+        total,
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum)
+      }
+    });
   } catch (error) {
-    console.error('Error fetching creators:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

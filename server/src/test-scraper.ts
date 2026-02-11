@@ -1,3 +1,6 @@
+import { maskSensitiveLogs } from './utils/logger';
+maskSensitiveLogs();
+
 import { Scraper } from 'agent-twitter-client';
 import dotenv from 'dotenv';
 import path from 'path';

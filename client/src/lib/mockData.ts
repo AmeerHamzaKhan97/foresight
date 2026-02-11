@@ -1,5 +1,6 @@
 export const MOCK_CREATORS = [
   {
+    _id: "mock-1",
     handle: "SrBachchan",
     displayName: "Amitabh Bachchan",
     status: "ACTIVE",
@@ -12,6 +13,7 @@ export const MOCK_CREATORS = [
     credibilityScore: 92
   },
   {
+    _id: "mock-2",
     handle: "mrwhosetheboss",
     displayName: "Arun Maini",
     status: "ACTIVE",
@@ -24,6 +26,7 @@ export const MOCK_CREATORS = [
     credibilityScore: 92
   },
   {
+    _id: "mock-3",
     handle: "BillGates",
     displayName: "Bill Gates",
     status: "ACTIVE",
@@ -36,6 +39,7 @@ export const MOCK_CREATORS = [
     credibilityScore: 94
   },
   {
+    _id: "mock-4",
     handle: "tarak9999",
     displayName: "Jr NTR",
     status: "ACTIVE",
@@ -48,6 +52,7 @@ export const MOCK_CREATORS = [
     credibilityScore: 89
   },
   {
+    _id: "mock-5",
     handle: "veritasium",
     displayName: "Veritasium",
     status: "ACTIVE",

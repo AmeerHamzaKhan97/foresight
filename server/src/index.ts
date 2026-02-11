@@ -1,3 +1,8 @@
+import { maskSensitiveLogs } from './utils/logger';
+
+// Initialize logger first to catch all logs
+maskSensitiveLogs();
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
