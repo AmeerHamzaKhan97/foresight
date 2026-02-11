@@ -34,25 +34,116 @@
 
 ---
 
-## 🛠️ Tech Stack
+---
 
-- **Frontend**: React (Vite), Tailwind CSS, Lucide React, Recharts.
-- **Backend**: Node.js, Express, MongoDB (Mongoose).
-- **AI Layer**: Google Gemini API via `@google/generative-ai`.
-- **Infrastructure**: BullMQ (Redis-backed) for the ingestion pipeline.
-- **Data Access**: `agent-twitter-client` for Twitter/X scraping.
+## 🏗️ Project Architecture
+
+This section provides a deep dive into how **Foresight** is built. It's designed to help you understand the system from a high level down to the individual components.
+
+### 1. High-Level System Architecture
+Foresight follows a **decoupled architecture**, meaning the frontend and backend are separate services that communicate via an API. We use a **background worker pattern** to handle heavy tasks like scraping and AI analysis without slowing down the user experience.
+
+```mermaid
+graph TD
+    User((User)) -->|Interacts| Frontend[Frontend: React SPA]
+    Frontend -->|HTTP Requests| API[Backend: Express API]
+    API -->|Stores Data| DB[(Database: MongoDB)]
+    API -->|Enqueues Jobs| Queue[Job Queue: Redis/BullMQ]
+    
+    subgraph "Background Workers"
+        Queue --> Worker1[Ingestion Worker]
+        Queue --> Worker2[Signal Worker]
+        Queue --> Worker3[Aggregation Worker]
+    end
+    
+    Worker1 -->|Scrapes| Twitter[Twitter/X]
+    Worker2 -->|Analyzes| LLM[AI: Gemini API]
+    Worker3 -->|Calculates Scores| DB
+```
+
+- **Frontend**: A modern React application that provides the user interface.
+- **Backend**: A Node.js/Express server that serves as the "brain," handling API requests and managing background jobs.
+- **Database**: MongoDB stores creator profiles, fetched content, and AI-generated signals.
+- **Queue**: Redis and BullMQ manage "delayed" tasks. For example, when you add a creator, the API doesn't make you wait; it tells a worker to handle it in the background.
 
 ---
 
-## 📁 Project Structure
+### 2. Frontend Architecture
+The frontend is built for speed and a smooth user experience.
 
-```text
-foresight/
-├── client/           # React Frontend (Vite)
-├── server/           # Express Backend & Background Workers
-├── docs/             # PRD, Technical Design, and Implementation Plans
-└── README.md         # You are here
-```
+- **Framework**: **React 18** (via Vite) for a component-based UI.
+- **State Management**: Uses **React Hooks** (`useState`, `useEffect`) for simple state and **Axios Interceptors** for global API handling (including mock data for the demo).
+- **Routing**: **React Router** manages navigation between the Home, search, and profile pages.
+- **Styling**: **Tailwind CSS** for a modern, responsive design that looks great on all devices.
+- **Visualizations**: **Recharts** transforms complex AI data into easy-to-read charts.
+
+**Real-world Example**: When you type in the search bar, the UI immediately filters results or shows a loading state, keeping the app feeling "snappy."
+
+---
+
+### 3. Backend Architecture
+The backend is designed using a **Service-Oriented** approach.
+
+- **Controllers (Routes)**: These handle incoming requests, validate the data, and send back responses.
+- **Services**: Contain the "business logic."
+    - `TwitterService`: Handles the complex logic of scraping data.
+    - `ScoreService`: Contains the mathematical formulas to calculate trust scores.
+- **Workers**: Autonomous "employees" that sit in the background and process tasks from the queue. This ensures that even if 100 people add creators at once, the server won't crash.
+
+---
+
+### 4. Database Design
+We use **MongoDB** because its flexible "document" structure is perfect for storing varying AI responses and tweet data.
+
+| Collection | Description | Key Fields |
+| :--- | :--- | :--- |
+| **Creators** | Profiles of people being analyzed | `handle`, `affiliationScore`, `credibilityScore` |
+| **Content** | Stored tweets/posts | `text`, `platformId`, `analyzed` (boolean) |
+| **Signals** | AI insights extracted from content | `type` (Affiliation/Credibility), `reasoning`, `confidence` |
+
+---
+
+### 5. Data Flow (The Journey of a Request)
+1. **Request**: A user enters `@SrBachchan` and clicks "Add."
+2. **API**: The server creates a "PENDING" profile and adds a job to the **Queue**.
+3. **Ingestion Worker**: Wakes up, scrapes Twitter for the latest 20 tweets, and saves them to the **Database**.
+4. **Signal Worker**: Takes those tweets, sends them to **Gemini AI**, and asks: "Is this persona biased?"
+5. **Aggregation Worker**: Takes the AI's "Signals" and runs them through our formula to give a final score out of 100.
+6. **Response**: The user refreshes the page and sees a beautiful report with scores and charts.
+
+---
+
+### 6. Authentication & Authorization
+*Currently in MVP*: The platform is **public**. This means anyone can search and view profiles.
+*Future Growth*: We plan to add **JWT (JSON Web Tokens)** for specialized features, allowing users to "save" their favorite creators to a personal dashboard.
+
+---
+
+### 7. Error Handling & Logging
+- **The "Safety Net"**: The backend uses a global error-handling middleware. If anything breaks, it logs the error and sends a polite "Internal Server Error" instead of crashing.
+- **Toast Notifications**: On the frontend, if an API call fails, a small "Toast" notification (red bubble) pops up to tell the user what went wrong.
+- **Job Retries**: If a worker fails (e.g., Twitter is down), BullMQ automatically retries the job later.
+
+---
+
+### 8. Scalability & Performance
+- **Asynchronous Processing**: By moving heavy work (AI/Scraping) to background workers, the main API stays fast and responsive.
+- **Indexing**: We use MongoDB indexes on `handle` and `platformId` so that searching through thousands of creators happens in milliseconds.
+- **Mock Mode**: To save on API costs and server load, the demo version uses pre-written data.
+
+---
+
+### 9. Security Best Practices
+- **Environment Variables**: Sensitive keys (like `GEMINI_API_KEY`) are NEVER stored in the code. We use `.env` files.
+- **Helmet.js**: Adds security headers to our API to prevent common web attacks.
+- **CORS**: Restricts which websites can talk to our API.
+
+---
+
+### 10. Deployment Architecture
+- **Continuous Integration (CI)**: We use GitHub Actions to automatically run tests every time code is pushed.
+- **Frontend Hosting**: Deployed to **GitHub Pages** for the demo.
+- **Backend Hosting**: Designed to run on **Render** or **Railway**, which easily handle Node.js and MongoDB connections.
 
 ---
 
